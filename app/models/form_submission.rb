@@ -1,8 +1,8 @@
 class FormSubmission < ActiveRecord::Base
   include MailForm::Delivery
 
-  # append :remote_ip, :user_agent, :session
-  attributes :submitter_email, :created_at
+  append :remote_ip, :user_agent, :session
+  attributes :post_data, :submitter_email, :created_at
 
   def headers
     {
