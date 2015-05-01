@@ -68,6 +68,7 @@ EOS
     :inline => "cd /vagrant; rvm 2.0 do bundle install"
 
   # Create the DB
-  config.vm.provision :shell, :inline => 'cd /vagrant; rake db:create'
+  config.vm.provision :shell, :privileged => false,
+    :inline => 'cd /vagrant; rvm 2.0 do bundle exec rake db:create'
 
 end
