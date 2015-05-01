@@ -9,7 +9,7 @@ Vagrant.configure("2") do |config|
   
   config.vm.box = "hashicorp/precise64"
 
-  config.vm.hostname = "static-line"
+  config.vm.hostname = "static-driver"
 
   config.vm.network :forwarded_port, guest: 3000, host: 7777, auto_correct: true
 
