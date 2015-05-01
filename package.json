@@ -1,0 +1,26 @@
+{
+  "name": "static-line",
+  "version": "2.0.0",
+  "description": "Static Jekyll-based web site for Herringbone restaurant.",
+  "main": "Gruntfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/VenueDriver/static-line.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/VenueDriver/static-line/issues"
+  },
+  "homepage": "https://github.com/VenueDriver/static-line",
+  "devDependencies": {
+    "grunt": "~0.4.5",
+    "grunt-aws-s3": "~0.13.0",
+    "grunt-responsive-images": "~0.1.6",
+    "grunt-jekyll": "~ 0.4.2",
+    "grunt-contrib-clean": "~ 0.6.0"
+  }
+}
