@@ -43,3 +43,4 @@ group :development, :test do
   gem 'spring'
 end
 
+gem 'mail_form', '~> 1.5.1'
