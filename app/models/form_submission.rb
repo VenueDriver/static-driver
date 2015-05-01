@@ -17,9 +17,8 @@ class FormSubmission < ActiveRecord::Base
     submitter_email || nil
   end
 
-  def initialize
-    super
-
+  after_initialize :use_sendgrid
+  def use_sendgrid
     if Rails.env.production?
       # Use Sendgrid for outbound email.
       ActionMailer::Base.smtp_settings = {
