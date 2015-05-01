@@ -55,20 +55,28 @@ sudo -u postgres createuser -sdR vagrant
 EOS
 
   # Ruby / Rubygems / Bundler
-  config.vm.provision :shell, :inline => "sudo apt-get -y install curl"
-  config.vm.provision :shell, :path => "vagrant/install-rvm.sh",  :args => "stable"
-  config.vm.provision :shell, :path => "vagrant/install-ruby.sh", :args => "2.0.0 haml"
-  config.vm.provision :shell, :inline => "rvm rvmrc trust /vagrant"
+  config.vm.provision :shell,
+    :inline => <<EOS
+apt-get -y update;
+apt-get -y install build-essential zlib1g-dev libssl-dev libreadline6-dev libyaml-dev;
+cd /tmp;
+wget http://ftp.ruby-lang.org/pub/ruby/2.1/ruby-2.1.5.tar.gz;
+tar -xvzf ruby-2.1.5.tar.gz;
+cd ruby-2.1.5/;
+./configure --prefix=/usr/local;
+make;
+make install
+EOS
   config.vm.provision :shell,
     :inline => "sudo apt-get install -y rubygems"
-  config.vm.provision :shell, :inline => "cd /vagrant; rvm 2.0 do gem install bundler"
+  config.vm.provision :shell, :inline => "cd /vagrant; gem install bundler"
 
   # Gem bundle
   config.vm.provision :shell, :privileged => false,
-    :inline => "cd /vagrant; rvm 2.0 do bundle install"
+    :inline => "cd /vagrant; bundle install"
 
   # Create the DB
   config.vm.provision :shell, :privileged => false,
-    :inline => 'cd /vagrant; rvm 2.0 do bundle exec rake db:create'
+    :inline => 'cd /vagrant; bundle exec rake db:create'
 
 end
