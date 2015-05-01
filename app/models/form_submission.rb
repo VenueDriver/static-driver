@@ -12,9 +12,11 @@ class FormSubmission < ActiveRecord::Base
   end
 
   # This is the sender's email, and we won't always have that available.  Some forms might not
-  # ask for it.  In those cases, we pass nil and the mail_form gem simply omits the From: line.
+  # ask for it.  In those cases, we pass a default.  Because otherwise you'll get this:
+  # ArgumentError (An SMTP From address is required to send a message. Set the message
+  # smtp_envelope_from, return_path, sender, or from address.)
   def email
-    submitter_email || nil
+    submitter_email || 'webnerds@hakkasan.com'
   end
 
   after_initialize :use_sendgrid
