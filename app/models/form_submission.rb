@@ -16,4 +16,22 @@ class FormSubmission < ActiveRecord::Base
   def email
     submitter_email || nil
   end
+
+  def initialize
+    super
+
+    if Rails.env.production?
+      # Use Sendgrid for outbound email.
+      ActionMailer::Base.smtp_settings = {
+        :user_name => Setting.value('sendgrid_username'),
+        :password => Setting.value('sendgrid_password'),
+        :domain => 'staticdriver.com',
+        :address => 'smtp.sendgrid.net',
+        :port => 587,
+        :authentication => :plain,
+        :enable_starttls_auto => true
+      }
+    end
+  end
+
 end
