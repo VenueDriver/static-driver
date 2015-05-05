@@ -2,11 +2,11 @@ class FormSubmission < ActiveRecord::Base
   include MailForm::Delivery
 
   append :remote_ip, :user_agent, :session
-  attributes :post_data, :submitter_email, :created_at
+  attributes :post_data, :submitter_email, :created_at, :to
 
   def headers
     {
-      :to => "ryan@hakkasan.com, dnorrbom@hakkasan.com",
+      :to => @to,
       :subject => "Test email"
     }
   end
