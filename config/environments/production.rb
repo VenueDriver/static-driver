@@ -76,15 +76,4 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
-
-  # Use Sendgrid for outbound email.
-  ActionMailer::Base.smtp_settings = {
-    :user_name => Setting.value('sendgrid_username'),
-    :password => Setting.value('sendgrid_password'),
-    :domain => 'staticdriver.com',
-    :address => 'smtp.sendgrid.net',
-    :port => 587,
-    :authentication => :plain,
-    :enable_starttls_auto => true
-  }
 end
