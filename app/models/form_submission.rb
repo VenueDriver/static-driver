@@ -3,6 +3,7 @@ class FormSubmission < ActiveRecord::Base
 
   append :remote_ip, :user_agent, :session
   attributes :post_data, :submitter_email, :created_at, :to
+  belongs_to :form
 
   def headers
     {
