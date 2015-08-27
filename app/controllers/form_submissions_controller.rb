@@ -6,7 +6,7 @@ class FormSubmissionsController < ApplicationController
 
     # TODO: Fall back on configured defaults if no form is found.
 
-    @form_submission = FormSubmission.new form:@form, to:@form.to, post_data:request.params.inspect
+    @form_submission = FormSubmission.new form:@form, to:@form.to, subject:@form.title, post_data:request.params.inspect
     @form_submission.request = request
     @form_submission.save
 
