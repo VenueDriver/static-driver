@@ -28,3 +28,58 @@ system for managing content.
 
 This app is for powering those few dynamic features in a web site, so that the rest of the site can
 be static.
+
+## Development
+
+### Prerequisites
+
+Static Driver is packaged in Docker containers, for portability.  To run it, you'll need Docker
+version 1.7.1 at least.  Please see the Docker installation instructions at:
+
+    https://docs.docker.com/engine/installation/ubuntulinux/
+
+All other prerequisites are packaged inside of the containers.  Docker is the only thing to
+install.
+
+### Build your containers
+
+This project uses [Docker Compose](https://docs.docker.com/compose/) to orchestrate multiple
+containers.  One container provides your database, and one provides your Rails app. The
+configuration is in the file docker-compose.yml.
+
+When you first start development, and any time that your Gemfile changes, you'll need to build
+your containers with:
+
+    sudo docker-compose build
+
+### Run your Ruby code
+
+Use your containers to run your Ruby code:
+
+    sudo docker-compose run web rake -T
+
+That tells Docker Compose to run the web and db containers and run "rake -T" in the web
+container.  You don't need the database to do that, but next you'll see how you can also access
+the database container from your Ruby code.
+
+### Build your databases
+
+Create your database in your db container with Ruby code in your web container:
+
+    sudo docker-compose run web rake db:create
+
+Now create your database structure:
+
+    sudo docker-compose run web rake db:migrate
+
+And don't forget to create a test database:
+
+    sudo docker-compose run web db:test:prepare
+
+### Do stuff
+
+You can do your standard Rails stuff:
+
+    sudo docker-compose run web rails console
+    
+    sudo docker-compose run web rails server
